@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CustomerDaoImpl implements CustomerDao {
     final String url = "jdbc:postgresql://localhost:5432/postgres";
     final String user = "postgres";
-    final String password =  "28092003vs";
+    final String password =  "Sunly@123";
 
     @Override
     public Connection connectionToDataBase() throws SQLException {
@@ -68,8 +68,8 @@ public class CustomerDaoImpl implements CustomerDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getBoolean("is_deleted"),
-                        resultSet.getDate("created_date"),
-                        resultSet.getString("bio")
+                        resultSet.getDate("created_date")
+
                 ));
             }
             return customers;
@@ -99,7 +99,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public int updateCustomerById(Integer id) {
         String sql = """
-                UPDATE "customer" SET name = ?, email = ?, password = ?, bio = ? WHERE id = ?
+                UPDATE "customer" SET name = ?, email = ?, password = ? WHERE id = ?
                 """;
         try(
                 Connection connection = connectionToDataBase();
@@ -115,8 +115,7 @@ public class CustomerDaoImpl implements CustomerDao {
                 pre.setString(2,new Scanner(System.in).nextLine());
                 System.out.print("New Password:");
                 pre.setString(3,new Scanner(System.in).nextLine());
-                System.out.print("New Bio:");
-                pre.setString(4,new Scanner(System.in).nextLine());
+
                 pre.setInt(5,id);
                 return pre.executeUpdate();
             }
@@ -129,8 +128,8 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public int addNewCustomer(Customer customer) {
         String sql = """
-                INSERT INTO customer (name, email, password, is_deleted, created_date, bio)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO customer (name, email, password, is_deleted, created_date)
+                VALUES (?, ?, ?, ?, ?)
                 """;
         try(
                 Connection connection = connectionToDataBase();
@@ -141,7 +140,7 @@ public class CustomerDaoImpl implements CustomerDao {
             pre.setString(3, customer.getPassword());
             pre.setBoolean(4, customer.getIs_deleted());
             pre.setDate(5, customer.getCreated_date());
-            pre.setString(6, customer.getBio());
+
             return pre.executeUpdate();
         }catch (SQLException sqlException){
             System.out.println(sqlException.getMessage());

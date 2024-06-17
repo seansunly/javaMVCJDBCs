@@ -119,7 +119,7 @@ public class OrderDaoImpl implements OrderDao{
                                 .password(resultSet.getString("password"))
                                 .is_deleted(resultSet.getBoolean("is_deleted"))
                                 .created_date(resultSet.getDate("created_date"))
-                                .bio(resultSet.getString("bio"))
+
                                 .build())
                         .build()
                 );

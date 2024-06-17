@@ -18,5 +18,5 @@ public class Customer {
     private String password;
     private Boolean is_deleted;
     private Date created_date;
-    private String bio;
+
 }

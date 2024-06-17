@@ -32,7 +32,7 @@ public class CustomerController {
                             .name(name)
                             .email(email)
                             .password(password)
-                            .bio(bio)
+
                             .is_deleted(false)
                             .created_date(Date.valueOf(LocalDate.now()))
                 .build());
